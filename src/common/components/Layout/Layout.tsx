@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="col-span-2  h-screen">
         <SideBar />
       </div>
-      <div className="col-span-10 bg-[#FAFAFB]">{children}</div>
+      <div className="col-span-10 bg-[#FAFAFB] p-6">{children}</div>
     </div>
   );
 };

@@ -39,9 +39,9 @@ const RecentAddedUser: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="max-w-sm mx-auto bg-white rounded-lg overflow-hidden border border-gray-200">
       <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-800 mb-1">
+        <h2 className="text-md font-semibold text-gray-800 mb-1">
           Recent Added Users
         </h2>
         <p className="text-sm text-gray-600 mb-4">
@@ -71,6 +71,12 @@ const RecentAddedUser: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8">
+          <p className="text-sm tracking-wider text-gray-500">
+            SEE ALL CUSTOMERS{" "}
+          </p>
         </div>
       </div>
     </div>

@@ -10,3 +10,11 @@ export interface RouteDefinition {
   path: string;
   element: ReactElement;
 }
+
+//Dashboard TabData 
+export interface TabProps {
+  title: string;
+  number: number;
+  growth: number;
+}
+

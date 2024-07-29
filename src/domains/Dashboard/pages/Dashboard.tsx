@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { FiPlus } from "react-icons/fi";
 import UserActivityReport from "../components/UserActivityReport";
 import RecentAddedUser from "../components/RecentAddedUser";
+import Feedback from "../components/FeedbackCard";
+import { FeedbackItem } from "../../../common/types";
 
 const Dashboard: React.FC = () => {
   const data = [
@@ -12,6 +14,26 @@ const Dashboard: React.FC = () => {
     { title: "TOTAL CONTACTED ", number: 23400, growth: 10 },
     { title: "TOTAL HIRED ", number: 203420, growth: 10 },
   ];
+
+  // src/data/fakeFeedbackData.ts
+
+
+const feedbackData: FeedbackItem[] = [
+  {
+    userName: 'John Doe',
+    rating: 5,
+    date: '2 hours ago',
+    feedback: 'The service was excellent and very fast.',
+    photosLink: '/photos/johndoe',
+  },
+  {
+    userName: 'Jane Smith',
+    rating: 4,
+    date: '1 day ago',
+    feedback: 'Had a good experience but there were minor issues.',
+    photosLink: '/photos/janesmith',
+  },
+];
 
   const handleClick = () => {
     alert("Button clicked!");
@@ -48,6 +70,11 @@ const Dashboard: React.FC = () => {
           <RecentAddedUser />
         </div>
       </div>
+
+      <div>
+        <Feedback feedbacks={feedbackData}  />
+      </div>
+     
     </>
   );
 };

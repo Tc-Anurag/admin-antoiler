@@ -5,6 +5,9 @@ import { TabProps } from "../../../common/types";
 const TabData: React.FC<TabProps> = ({ title, number, growth }) => {
   const formattedNumber = number.toLocaleString();
 
+  // Determine the color class based on growth percentage
+  const growthClass = growth > 0 ? (growth < 25 ? 'text-red-500' : 'text-green-500') : 'text-red-500';
+
   return (
     <div
       className="w-72 bg-white rounded-lg border border-gray-200 p-2"

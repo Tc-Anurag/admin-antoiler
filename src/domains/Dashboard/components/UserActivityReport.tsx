@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "chart.js/auto";
 import { FiDownload } from "react-icons/fi";
 
 ChartJS.register(
@@ -41,62 +40,75 @@ const UserActivityReport: React.FC = () => {
     ],
     datasets: [
       {
-        label: "User Activity",
+        label: "User Activity A",
         data: [
           20000, 25000, 23000, 28000, 45591, 30000, 35000, 37000, 36000, 40000,
           45000, 48000,
         ],
         fill: true,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "rgba(54, 162, 235, 1)",
-        tension: 0.4,
+        borderColor: "#4F46E5",
+        backgroundColor: "rgba(72, 85, 99, 0.2)", // Updated for better visibility
+        tension: 0.8,
+        pointRadius: 0,
+      },
+      {
+        label: "User Activity B",
+        data: [
+          15000, 20000, 18000, 23000, 40000, 28000, 32000, 34000, 33000, 37000,
+          42000, 46000,
+        ],
+        fill: true,
+        borderColor: "#818CF8",
+        backgroundColor: "rgba(54, 162, 235, 0.2)", // Updated for better visibility
+        tension: 0.8,
+        pointRadius: 0,
       },
     ],
   };
 
-  const options = {
-    // responsive: true,
-    maintainAspectRatio: true,
+  const options: any = {
+    responsive: true,
+    maintainAspectRatio: false, // Allow height adjustment
     scales: {
-      y: {
-        grid: {
-          display: true, // Show the y-axis grid lines
-        },
-        ticks: {
-          // Customize tick appearance
-          padding: 5, // Adjust padding around ticks
-        },
-        title: {
-          display: true,
-
-          font: {
-            size: 14, // Adjust font size of title
-          },
-        },
-      },
       x: {
         grid: {
-          display: false, // Hide x-axis grid lines
+          display: false, // Hide horizontal grid lines
+        },
+      },
+      y: {
+        grid: {
+          display: true, // Show vertical grid lines
+          borderColor: "#e5e7eb", // Optional: change border color
+        },
+        ticks: {
+          display: true, // Show vertical axis labels
+          stepSize: 10000, // Adjust step size to create approximately 4 lines
+          // Optional: set min and max for better control
+          // min: 0, // You can set min if necessary
+          // max: 50000, // Set max according to your data range
+        },
+        border: {
+          display: false, // Hide the y-axis border line
         },
       },
     },
-
     plugins: {
       legend: {
-        display: false,
+        display: false, // Set to true to show legend
+        position: "top",
       },
       tooltip: {
-        callbacks: {
-          label: function (context: any) {
-            return `${context.raw}`;
-          },
-        },
+        enabled: false, // Disable tooltips completely
+        // Alternatively, if you want to customize or selectively show tooltips:
+        // callbacks: {
+        //   label: (context: any) => `${context.dataset.label}: ${context.raw}`,
+        // },
       },
     },
   };
 
   return (
-    <div className=" bg-white p-4 rounded-lg border border-gray-200">
+    <div className="bg-white pl-8 pr-2 py-4 rounded-lg border border-gray-200">
       <div className="flex justify-between mb-4">
         <h2 className="text-left font-semibold">User Activity Report</h2>
         <div>
@@ -115,7 +127,7 @@ const UserActivityReport: React.FC = () => {
         </button>
       </div>
 
-      <div>
+      <div className="w-full h-60">
         <Line data={data} options={options} />
       </div>
     </div>

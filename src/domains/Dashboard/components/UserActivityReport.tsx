@@ -9,8 +9,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
-import { FiDownload } from "react-icons/fi";
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const UserActivityReport: React.FC = () => {
@@ -46,10 +47,13 @@ const UserActivityReport: React.FC = () => {
           45000, 48000,
         ],
         fill: true,
-        borderColor: "#4F46E5",
-        backgroundColor: "rgba(72, 85, 99, 0.2)", // Updated for better visibility
+        borderColor: "#F15A24",
+        backgroundColor: "rgba(238, 242, 255, 0.5)",
         tension: 0.8,
-        pointRadius: 0,
+        pointRadius: 5,
+        pointBorderWidth: 2,
+        pointBorderColor: "white",
+        pointBackgroundColor: "#F15A24",
       },
       {
         label: "User Activity B",
@@ -58,58 +62,65 @@ const UserActivityReport: React.FC = () => {
           42000, 46000,
         ],
         fill: true,
-        borderColor: "#818CF8",
-        backgroundColor: "rgba(54, 162, 235, 0.2)", // Updated for better visibility
+        borderColor: "#F15A24",
+        backgroundColor: "rgba(241, 90, 36, 0.2)",
         tension: 0.8,
-        pointRadius: 0,
+        pointRadius: 5,
+        pointBorderWidth: 2,
+        pointBorderColor: "white",
+        pointBackgroundColor: "#F15A24",
       },
     ],
   };
 
   const options: any = {
     responsive: true,
-    maintainAspectRatio: false, // Allow height adjustment
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: {
-          display: false, // Hide horizontal grid lines
+          display: false,
         },
       },
       y: {
         grid: {
-          display: true, // Show vertical grid lines
-          borderColor: "#e5e7eb", // Optional: change border color
+          display: true,
+          borderColor: "#e5e7eb",
         },
         ticks: {
-          display: true, // Show vertical axis labels
-          stepSize: 10000, // Adjust step size to create approximately 4 lines
-          // Optional: set min and max for better control
-          // min: 0, // You can set min if necessary
-          // max: 50000, // Set max according to your data range
+          display: false,
+          count: 5, // This will create 4 spaces, resulting in 4 lines
         },
         border: {
-          display: false, // Hide the y-axis border line
+          display: false,
         },
       },
     },
     plugins: {
       legend: {
-        display: false, // Set to true to show legend
-        position: "top",
+        display: false,
       },
       tooltip: {
-        enabled: false, // Disable tooltips completely
-        // Alternatively, if you want to customize or selectively show tooltips:
-        // callbacks: {
-        //   label: (context: any) => `${context.dataset.label}: ${context.raw}`,
-        // },
+        enabled: true,
+        backgroundColor: "white", // Sets the background color of the tooltip
+        titleColor: "black", // Optional: Sets the color of the tooltip title
+        bodyColor: "black", // Optional: Sets the color of the tooltip body
+        borderColor: "#E4E4E7", // Optional: Sets the border color of the tooltip
+        borderWidth: 1, // Optional: Sets the border width of the tooltip
+        callbacks: {
+          label: (tooltipItem: any) =>
+            `${tooltipItem.dataset.label}: ${tooltipItem.raw}`,
+        },
+      },
+      filler: {
+        propagate: true,
       },
     },
   };
 
   return (
     <div className="bg-white pl-8 pr-2 py-4 rounded-lg border border-gray-200">
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-start items-center space-x-4 mb-4">
         <h2 className="text-left font-semibold">User Activity Report</h2>
         <div>
           <button className="mx-2 px-4 py-2 border border-gray-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 rounded-md text-black font-semibold text-sm">
@@ -121,10 +132,6 @@ const UserActivityReport: React.FC = () => {
           <button className="mx-2 px-4 py-2 rounded-md text-sm">30 Days</button>
           <button className="mx-2 px-4 py-2 rounded-md text-sm">7 Days</button>
         </div>
-        <button className="px-4 py-2 border border-gray-300 rounded-md text-sm flex items-center">
-          <FiDownload className="mr-2" />
-          Export PDF
-        </button>
       </div>
 
       <div className="w-full h-60">

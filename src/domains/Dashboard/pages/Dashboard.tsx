@@ -6,34 +6,32 @@ import UserActivityReport from "../components/UserActivityReport";
 import RecentAddedUser from "../components/RecentAddedUser";
 import Feedback from "../components/FeedbackCard";
 import { FeedbackItem } from "../../../common/types";
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "../../../services/apiService";
 
 const Dashboard: React.FC = () => {
-  const data = [
-    { title: "TOTAL ACTIVE ANTOILERS", number: 12426, growth: 15 },
-    { title: "TOTAL ACTIVE USERS", number: 238425, growth: -5 },
-    { title: "TOTAL CONTACTED ", number: 23400, growth: 10 },
-    { title: "TOTAL HIRED ", number: 203420, growth: 10 },
+  const { data } = useQuery({
+    queryKey: ["dashboardStatistics"],
+    queryFn: () => getData("user/get-dashboard-statistics"),
+  });
+
+  // Sample feedback data (ideally should be fetched dynamically)
+  const feedbackData: FeedbackItem[] = [
+    {
+      userName: "John Doe",
+      rating: 5,
+      date: "2 hours ago",
+      feedback: "The service was excellent and very fast.",
+      photosLink: "/photos/johndoe",
+    },
+    {
+      userName: "Jane Smith",
+      rating: 4,
+      date: "1 day ago",
+      feedback: "Had a good experience but there were minor issues.",
+      photosLink: "/photos/janesmith",
+    },
   ];
-
-  // src/data/fakeFeedbackData.ts
-
-
-const feedbackData: FeedbackItem[] = [
-  {
-    userName: 'John Doe',
-    rating: 5,
-    date: '2 hours ago',
-    feedback: 'The service was excellent and very fast.',
-    photosLink: '/photos/johndoe',
-  },
-  {
-    userName: 'Jane Smith',
-    rating: 4,
-    date: '1 day ago',
-    feedback: 'Had a good experience but there were minor issues.',
-    photosLink: '/photos/janesmith',
-  },
-];
 
   const handleClick = () => {
     alert("Button clicked!");
@@ -45,19 +43,19 @@ const feedbackData: FeedbackItem[] = [
         <Button
           label="Create New Account"
           onClick={handleClick}
-          style={{ backgroundColor: "#4F46E5", color: "white" }}
+          style={{ backgroundColor: "#F15A24", color: "white" }}
           className="rounded-lg flex p-2 items-center"
           icon={FiPlus}
           iconPosition="left"
         />
       </div>
       <div className="flex space-x-10">
-        {data.map((item, index) => (
+        {data?.data?.map((item: any, index: number) => (
           <TabData
             key={index}
-            title={item.title}
-            number={item.number}
-            growth={item.growth}
+            title={item?.title}
+            number={item?.number}
+            growth={Math.floor(item?.growth)}
           />
         ))}
       </div>
@@ -72,9 +70,8 @@ const feedbackData: FeedbackItem[] = [
       </div>
 
       <div>
-        <Feedback feedbacks={feedbackData}  />
+        <Feedback feedbacks={feedbackData} />
       </div>
-     
     </>
   );
 };

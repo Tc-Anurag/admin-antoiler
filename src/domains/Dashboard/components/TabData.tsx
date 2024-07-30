@@ -6,16 +6,21 @@ const TabData: React.FC<TabProps> = ({ title, number, growth }) => {
   const formattedNumber = number.toLocaleString();
 
   // Determine the color class based on growth percentage
-  const growthClass = growth > 0 ? (growth < 25 ? 'text-red-500' : 'text-green-500') : 'text-red-500';
+  const growthClass =
+    growth > 0
+      ? growth < 25
+        ? "text-red-500"
+        : "text-green-500"
+      : "text-red-500";
 
   return (
     <div
       className="w-72 bg-white rounded-lg border border-gray-200 p-2"
       style={{ borderRadius: "10px" }}
     >
-      <h2 className="text-gray-700 mb-2 text-sm tracking-wider">{title}</h2>
+      <h2 className="text-gray-500 mb-2 text-xs tracking-wider">{title}</h2>
       <div className="flex items-center justify-between">
-        <span className="text-lg font-semibold">{formattedNumber}</span>
+        <span className=" font-extrabold">{formattedNumber}</span>
         <div
           className={`flex items-center ${
             growth > 0 ? "text-green-500" : "text-red-500"

@@ -1,4 +1,4 @@
-import React from "react";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface User {
   name: string;
@@ -73,10 +73,11 @@ const RecentAddedUser: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-8">
-          <p className="text-sm tracking-wider text-gray-500">
-            SEE ALL CUSTOMERS{" "}
+        <div className="mt-8 flex items-center">
+          <p className="text-sm tracking-wider text-[#151518]">
+            SEE ALL CUSTOMERS
           </p>
+          <IoIosArrowForward style={{ color: "#151518" }} />
         </div>
       </div>
     </div>

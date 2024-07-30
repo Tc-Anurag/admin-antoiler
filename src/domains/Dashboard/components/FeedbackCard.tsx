@@ -23,7 +23,7 @@ const Feedback: React.FC<FeedbackProps> = ({ feedbacks }) => {
         <span>
           <Link
             to={""}
-            className="text-blue-600 flex items-center text-sm whitespace-nowrap"
+            className="text-[#F15A24] flex items-center text-sm whitespace-nowrap"
           >
             See All Feedback <FaGreaterThan size={12} className="ml-2" />
           </Link>
